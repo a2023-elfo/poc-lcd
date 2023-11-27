@@ -1,7 +1,8 @@
 #include <Arduino.h>
 #include <LiquidCrystal.h>
+#include <LibRobus.h>
 
-const int rs = 3, en = 4, d4 = 5, d5 = 6, d6 = 7, d7 = 8;
+const int rs = 22, en = 24, d4 = 42, d5 = 43, d6 = 44, d7 = 45;
 
 LiquidCrystal lcd(rs, en, d4, d5, d6, d7);
 String* _plantName = 0;
@@ -59,8 +60,9 @@ void updateScreen() {
 }
 
 void setup() {
+  Serial.begin(9600);  
+  BoardInit();
   lcd.begin(16, 2);
-  Serial.begin(9600);
   lcd.setCursor(2, 0);
   lcd.print("Hello, ELFO!");
   delay(2000);
